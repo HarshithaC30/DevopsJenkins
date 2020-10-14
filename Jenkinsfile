@@ -6,22 +6,7 @@ pipeline {
                 git url: 'https://github.com/HarshithaC30/DevopsJenkins'
             }
         }
-        stage("Quality gate status check"){
-            steps{
-                script{
-                    withSonarQubeEnv('sonarserver'){
-                        bat "mvn sonar:sonar"
-                        timeout(time: 1,unit: 'HOURS'){
-                            def qg = waitforQualityGate()
-                            if(qg.status != 'OK'){
-                                error "Pipeline aborted : ${qg.status}"
-                            }
-                            
-                        }
-                        bat "mvn clean install"
-                }
-            }
-        }
+        
         stage('Build && SonarQube analysis') { 
             steps {
                 echo "This is a build process without sonarqube "
@@ -33,13 +18,20 @@ pipeline {
                 }
             }
         }
-        stage("Quality Gate") {
-            steps {
-                echo "This is quality gate stage"
-                timeout(time: 1, unit: 'HOURS') {
-                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-                    // true = set pipeline to UNSTABLE, false = don't
-                    waitForQualityGate abortPipeline: true
+        stage("Quality Gate Status Check") {
+            steps{
+                echo "This is quality gate status check"
+                script{
+                    withSonarQubeEnv('sonarserver'){
+                        bat "mvn sonar:sonar"
+                        timeout(time: 1,unit: 'HOURS'){
+                            def qg = waitforQualityGate()
+                            if(qg.status != 'OK'){
+                                error "Pipeline aborted : ${qg.status}"
+                            }
+                            
+                        }
+                        bat "mvn clean install"
                 }
             }
         }
