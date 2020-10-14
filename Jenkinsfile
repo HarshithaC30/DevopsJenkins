@@ -1,8 +1,20 @@
-node{
-  stage('SCM Checkout'){
-    git 'https://github.com/HarshithaC30/DevopsJenkins.git'
-  }
-  stage('Complie-Package'){
-    bat "mvn package"
-  }
+pipeline {
+    agent any 
+    stages {
+        stage('Build') { 
+            steps {
+                echo "This is a build process"
+            }
+        }
+        stage('Test') { 
+            steps {
+                echo "This is test process" 
+            }
+        }
+        stage('Deploy') { 
+            steps {
+                echo "This is a deploy stage" 
+            }
+        }
+    }
 }
