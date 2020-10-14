@@ -3,7 +3,6 @@ node{
     git 'https://github.com/HarshithaC30/DevopsJenkins.git'
   }
   stage('Complie-Package'){
-    def mvnHome = tool name: '', type: 'maven'
-    bat "${mvnHome}/bin/mvn package"
+    bat "mvn package"
   }
 }
