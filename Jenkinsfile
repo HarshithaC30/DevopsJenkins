@@ -2,11 +2,13 @@ pipeline{
     agent any
     stages{
         stage('checkout'){
+		echo "Checkout stage"
             steps{
                git 'https://github.com/HarshithaC30/DevopsJenkins'
             }
         }
         stage('Build'){
+		echo "Build stage"
             steps{
                bat 'mvn clean package'
             }
@@ -18,6 +20,7 @@ pipeline{
             }
         }
         stage('SonarQube analysis') {
+		echo "SonarQube Analysis stage"
             steps{
                 withSonarQubeEnv('sonar'){
                    bat 'mvn sonar:sonar'
