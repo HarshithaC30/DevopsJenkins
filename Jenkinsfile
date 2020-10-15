@@ -9,7 +9,7 @@ pipeline {
         
         stage('Build && SonarQube analysis') { 
             steps {
-                echo "This is a build process without sonarqube "
+                echo "This is a build without sonarqube "
                 withSonarQubeEnv('My SonarQube Server') {
                     // Optionally use a Maven environment you've configured already
                     withMaven(maven:'Maven 3.5') {
