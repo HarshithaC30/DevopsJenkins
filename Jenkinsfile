@@ -7,14 +7,18 @@ pipeline {
             }
         }
         
+        stage('Compile-Package') {
+            steps {
+                bat "mvn clean package"
+            }
+        }
+        
         stage('Build && SonarQube analysis') { 
             steps {
                 echo "This is a build without SonarqQbe !"
                 withSonarQubeEnv('My SonarQube Server') {
                     // Optionally use a Maven environment you've configured already
-                    withMaven(maven:'Maven 3.5') {
                         bat 'mvn clean package sonar:sonar'
-                    }
                 }
             }
         }
