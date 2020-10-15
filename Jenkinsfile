@@ -1,5 +1,3 @@
-
-
 pipeline{
     agent any
     stages{
@@ -25,7 +23,7 @@ pipeline{
                    bat 'mvn sonar:sonar'
                 }
             }
-			}
+	}
         
      }
 	
