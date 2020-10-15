@@ -20,7 +20,7 @@ pipeline {
         }
         stage("Quality Gate Status Check") {
             steps{
-                echo "This is quality gate check"
+                echo "This is quality gate status check"
                 script{
                     withSonarQubeEnv('sonarserver'){
                         bat "mvn sonar:sonar"
