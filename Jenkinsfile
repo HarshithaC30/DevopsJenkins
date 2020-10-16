@@ -14,7 +14,7 @@ pipeline{
             }
             post{
                 success{
-                    echo 'Now Archiving...build'
+                    echo 'Now Archiving...build stage'
                 }
             }
         }
